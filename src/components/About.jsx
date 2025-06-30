@@ -50,7 +50,7 @@ export default function About() {
   return (
     <motion.section
       ref={ref}
-      className="relative grid place-content-center isolate md:h-lvh overflow-hidden bg-black py-24 sm:py-32"
+      className="relative grid place-content-center isolate md:h-lvh overflow-hidden bg-gradient-to-br from-[#0d0618] via-[#1a0b3d] to-[#000000] py-24 sm:py-32"
       id="about"
       aria-labelledby="about-heading"
       initial={{ opacity: 0, y: 50 }}
@@ -72,7 +72,7 @@ export default function About() {
         }}
       >
         <div
-          className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20"
+          className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#2D0FF7] via-[#A10FF2] to-[#F20059] opacity-25"
           style={{
             clipPath:
               "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
@@ -90,7 +90,7 @@ export default function About() {
         >
           <motion.h1 
             id="about-heading"
-            className="text-4xl font-bold tracking-tight text-white sm:text-6xl"
+            className="heading-section text-neon-pink"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -98,7 +98,7 @@ export default function About() {
             About us
           </motion.h1>
           <motion.p 
-            className="mt-6 text-sm md:text-xl leading-8 text-gray-300"
+            className="mt-6 text-lg md:text-xl leading-8 text-description text-shadow-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}

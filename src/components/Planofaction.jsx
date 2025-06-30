@@ -17,7 +17,7 @@ const features = [
   {
     name: "BUILDING FOUNDATIONS",
     subtitle: "Focused Learning & Growth",
-    backgroundColor: "from-blue-900/20 via-indigo-900/20 to-purple-900/20",
+    backgroundColor: "from-[#2D0FF7]/20 via-[#6A0FF4]/15 to-[#8900F2]/20",
     accentColor: "blue",
     frontIcon: <MagnifyingGlassIcon className="w-12 h-12" />,
     features: [
@@ -34,7 +34,7 @@ const features = [
   {
     name: "COMMUNITY BUILDING",
     subtitle: "Together We Grow",
-    backgroundColor: "from-purple-900/20 via-pink-900/20 to-rose-900/20",
+    backgroundColor: "from-[#A10FF2]/20 via-[#BC00DD]/15 to-[#D100D1]/20",
     accentColor: "purple",
     frontIcon: <UsersIcon className="w-12 h-12" />,
     features: [
@@ -55,7 +55,7 @@ const features = [
   {
     name: "WELCOMING TALENT",
     subtitle: "Inclusive & Nurturing",
-    backgroundColor: "from-cyan-900/20 via-teal-900/20 to-emerald-900/20",
+    backgroundColor: "from-[#D100D1]/20 via-[#DB00B6]/15 to-[#E500A4]/20",
     accentColor: "cyan",
     frontIcon: <FolderArrowDownIcon className="w-12 h-12" />,
     features: [
@@ -72,7 +72,7 @@ const features = [
   {
     name: "SKILL DEMONSTRATION",
     subtitle: "Showcase & Publish",
-    backgroundColor: "from-orange-900/20 via-red-900/20 to-pink-900/20",
+    backgroundColor: "from-[#E500A4]/20 via-[#EF0078]/15 to-[#F20059]/20",
     accentColor: "orange",
     frontIcon: <ClipboardDocumentListIcon className="w-12 h-12" />,
     features: [
@@ -130,7 +130,7 @@ const subFeatureVariants = {
 export default function Planofaction() {
   return (
     <section
-      className="relative bg-black py-14 sm:py-20 md:pb-44 overflow-hidden"
+      className="relative bg-gradient-to-br from-[#0d0618] via-[#1a0b3d] to-[#000000] py-14 sm:py-20 md:pb-44 overflow-hidden"
       id="planofaction"
       aria-labelledby="plan-heading"
     >
@@ -140,7 +140,7 @@ export default function Planofaction() {
         aria-hidden="true"
       >
         <div
-          className="aspect-[1108/632] w-[40rem] bg-gradient-to-r from-[#80caff]/10 to-[#4f46e5]/10 opacity-30"
+          className="aspect-[1108/632] w-[40rem] bg-gradient-to-r from-[#2D0FF7]/12 via-[#6A0FF4]/8 to-[#8900F2]/12 opacity-35"
           style={{
             clipPath:
               "polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)",
@@ -153,7 +153,7 @@ export default function Planofaction() {
         aria-hidden="true"
       >
         <div
-          className="aspect-[1108/632] w-[35rem] bg-gradient-to-l from-[#ff4694]/10 to-[#776fff]/10 opacity-20"
+          className="aspect-[1108/632] w-[35rem] bg-gradient-to-l from-[#F20059]/12 via-[#E500A4]/8 to-[#D100D1]/12 opacity-30"
           style={{
             clipPath:
               "polygon(26.4% 48.3%, 8.3% 88.2%, 0% 53.6%, 2.6% 17.8%, 7.5% 15.1%, 24.3% 36%, 44.7% 52.5%, 53.5% 50.6%, 55% 37.1%, 49.7% 12.8%, 78.7% 35.9%, 99.9% 0%, 94.6% 48.9%, 78.6% 36.1%, 41.1% 99.8%, 26.4% 48.3%)",
@@ -171,13 +171,13 @@ export default function Planofaction() {
         >
           <motion.h1
             id="plan-heading"
-            className="mt-2 text-3xl font-bold tracking-tight text-[#dadada] sm:text-6xl text-center relative"
+            className="mt-2 heading-hero text-center relative"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2 }}
           >
             Plan Of Action
             <motion.div
-              className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#80caff] to-[#4f46e5] rounded-full"
+              className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#2D0FF7] via-[#A10FF2] to-[#F20059] rounded-full"
               initial={{ width: 0 }}
               whileInView={{ width: 96 }}
               transition={{ duration: 0.8, delay: 0.3 }}

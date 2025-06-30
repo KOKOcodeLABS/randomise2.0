@@ -29,10 +29,10 @@ const Navbar = () => {
     }, []);
 
     const navactive =
-        "fixed top-0 left-0 right-0 z-50 bg-black text-white font-sans sm:px-4 sm:py-3 md:px-4 md:py-6 p-5 opacity-100 backdrop-blur bg-transparent shadow-md border-b border-gray-900 ";
+        "fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#0d0618]/95 via-[#1a0b3d]/95 to-[#0d0618]/95 text-white font-sans sm:px-4 sm:py-3 md:px-4 md:py-6 p-5 opacity-100 backdrop-blur border-b border-[#A10FF2]/20 ";
 
     const nav =
-        " fixed top-0 left-0 right-0 z-50 text-white font-sans sm:px-4 sm:py-3 md:px-4 md:py-6 p-5  bg-black backdrop-blur bg-transparent shadow-md border-b border-gray-900 ";
+        " fixed top-0 left-0 right-0 z-50 text-white font-sans sm:px-4 sm:py-3 md:px-4 md:py-6 p-5 bg-gradient-to-r from-[#0d0618]/90 via-[#1a0b3d]/90 to-[#0d0618]/90 backdrop-blur border-b border-[#A10FF2]/10 ";
 
     return (
         <>

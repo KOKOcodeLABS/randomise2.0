@@ -46,32 +46,32 @@ export default function CardFlip({
   // Color configurations
   const colorConfig = {
     blue: {
-      accent: "text-blue-400",
-      border: "border-blue-500/30",
-      glow: "shadow-blue-500/20",
-      gradient: "from-blue-500/10 via-blue-500/5 to-transparent",
-      hoverGradient: "group-hover:from-blue-500/20 group-hover:via-blue-500/10 group-hover:to-transparent"
+      accent: "text-[#6A0FF4]",
+      border: "border-[#2D0FF7]/30",
+      glow: "shadow-[#2D0FF7]/20",
+      gradient: "from-[#2D0FF7]/10 via-[#6A0FF4]/5 to-transparent",
+      hoverGradient: "group-hover:from-[#2D0FF7]/20 group-hover:via-[#6A0FF4]/10 group-hover:to-transparent"
     },
     purple: {
-      accent: "text-purple-400",
-      border: "border-purple-500/30",
-      glow: "shadow-purple-500/20",
-      gradient: "from-purple-500/10 via-purple-500/5 to-transparent",
-      hoverGradient: "group-hover:from-purple-500/20 group-hover:via-purple-500/10 group-hover:to-transparent"
+      accent: "text-[#BC00DD]",
+      border: "border-[#A10FF2]/30",
+      glow: "shadow-[#A10FF2]/20",
+      gradient: "from-[#A10FF2]/10 via-[#BC00DD]/5 to-transparent",
+      hoverGradient: "group-hover:from-[#A10FF2]/20 group-hover:via-[#BC00DD]/10 group-hover:to-transparent"
     },
     cyan: {
-      accent: "text-cyan-400",
-      border: "border-cyan-500/30",
-      glow: "shadow-cyan-500/20",
-      gradient: "from-cyan-500/10 via-cyan-500/5 to-transparent",
-      hoverGradient: "group-hover:from-cyan-500/20 group-hover:via-cyan-500/10 group-hover:to-transparent"
+      accent: "text-[#E500A4]",
+      border: "border-[#D100D1]/30",
+      glow: "shadow-[#D100D1]/20",
+      gradient: "from-[#D100D1]/10 via-[#DB00B6]/5 to-transparent",
+      hoverGradient: "group-hover:from-[#D100D1]/20 group-hover:via-[#DB00B6]/10 group-hover:to-transparent"
     },
     orange: {
-      accent: "text-orange-400",
-      border: "border-orange-500/30",
-      glow: "shadow-orange-500/20",
-      gradient: "from-orange-500/10 via-orange-500/5 to-transparent",
-      hoverGradient: "group-hover:from-orange-500/20 group-hover:via-orange-500/10 group-hover:to-transparent"
+      accent: "text-[#F20059]",
+      border: "border-[#EF0078]/30",
+      glow: "shadow-[#EF0078]/20",
+      gradient: "from-[#EF0078]/10 via-[#F20059]/5 to-transparent",
+      hoverGradient: "group-hover:from-[#EF0078]/20 group-hover:via-[#F20059]/10 group-hover:to-transparent"
     }
   };
 
@@ -97,7 +97,7 @@ export default function CardFlip({
             absolute inset-0 w-full h-full
             [backface-visibility:hidden] [transform:rotateY(0deg)]
             overflow-hidden rounded-2xl lg:rounded-3xl
-            bg-black border ${colors.border}
+            bg-gradient-to-br from-[#1e0f4a] via-[#2a1255] to-[#1a0b3d] border ${colors.border}
             shadow-2xl ${colors.glow}
             transition-all duration-700
             group-hover:shadow-3xl group-hover:${colors.glow}
@@ -143,10 +143,10 @@ export default function CardFlip({
 
             {/* Title area */}
             <div className="text-center space-y-2">
-              <h3 className={`${config.title} font-bold text-white leading-tight tracking-tight transition-all duration-500 group-hover:translate-y-[-4px]`}>
+              <h3 className={`${config.title} heading-card transition-all duration-500 group-hover:translate-y-[-4px] text-hover-glow`}>
                 {title}
               </h3>
-              <p className={`${config.subtitle} text-gray-400 transition-all duration-500 group-hover:translate-y-[-2px] delay-75`}>
+              <p className={`${config.subtitle} text-subtitle transition-all duration-500 group-hover:translate-y-[-2px] delay-75`}>
                 {subtitle}
               </p>
             </div>
@@ -167,7 +167,7 @@ export default function CardFlip({
             absolute inset-0 w-full h-full
             [backface-visibility:hidden] [transform:rotateY(180deg)]
             ${config.backPadding} rounded-2xl lg:rounded-3xl
-            bg-black border ${colors.border}
+            bg-gradient-to-br from-[#1e0f4a] via-[#2a1255] to-[#1a0b3d] border ${colors.border}
             shadow-2xl ${colors.glow}
             flex flex-col
             transition-all duration-700
@@ -181,7 +181,7 @@ export default function CardFlip({
           <div className="relative flex-1 flex flex-col">
             {/* Header */}
             <div className="mb-6">
-              <h3 className={`${config.title} font-bold text-white leading-tight tracking-tight mb-2`}>
+              <h3 className={`${config.title} heading-card mb-2`}>
                 {title}
               </h3>
               <div className={`w-12 h-0.5 bg-gradient-to-r ${colors.gradient} rounded-full`} />
@@ -204,10 +204,10 @@ export default function CardFlip({
                 >
                   <div className={`w-1.5 h-1.5 rounded-full ${colors.accent} mt-2 flex-shrink-0`} />
                   <div className="min-w-0 flex-1">
-                    <div className="font-semibold text-white mb-1 break-words">
+                    <div className="text-enhanced mb-1 break-words">
                       {feature.name}
                     </div>
-                    <div className="text-gray-400 leading-relaxed break-words hyphens-auto">
+                    <div className="text-description leading-relaxed break-words hyphens-auto">
                       {feature.description}
                     </div>
                   </div>

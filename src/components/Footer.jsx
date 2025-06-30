@@ -41,7 +41,7 @@ const navigation = {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#030712]">
+    <footer className="bg-gradient-to-t from-[#000000] via-[#1a0b3d] to-[#0d0618] border-t border-[#A10FF2]/20">
       <div className="mx-auto max-w-[100vw] overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
         <nav
           className="-mb-6 columns-2 sm:flex sm:justify-center sm:space-x-12"
