@@ -61,7 +61,7 @@ export default function Landing() {
             {/* Logo Container with Enhanced Parallax */}
             <FloatingElement depth={2} className="flex place-content-center" absolute={false}>
               <motion.div 
-                className="relative mt-16 md:mt-0 h-56 w-56 lg:h-80 lg:w-80"
+                className="relative mt-8 md:-mt-8 h-56 w-56 lg:h-80 lg:w-80"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ 
                   opacity: 1, 
@@ -151,12 +151,12 @@ export default function Landing() {
             {/* Title Text with Parallax */}
             <FloatingElement depth={2.2} absolute={false}>
               <motion.div 
-                className="mx-auto flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-0"
+                className="mx-auto flex-shrink-0 lg:mx-auto lg:max-w-xl lg:pt-0 flex justify-center"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                <h1 className="text-[10vw] text-center md:text-[15vw] lg:text-5xl leading-none select-none tracking-tightest font-extrabold lg:flex mt-4 gap-2">
+                <h1 className="text-[10vw] text-center md:text-[15vw] lg:text-5xl leading-none select-none tracking-tightest font-extrabold flex flex-col lg:flex-row mt-4 gap-2 justify-center items-center">
                   <motion.span
                     data-content="Ideate."
                     className="relative block text-gradient-primary text-shadow-glow flex-row"

@@ -32,8 +32,8 @@ export default function AnimatedRandomizeText() {
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <svg
-            width="68"
-            height="84"
+            width="88"
+            height="108"
             viewBox="0 0 64 64"
             className="inline-block"
             style={{
@@ -74,8 +74,8 @@ export default function AnimatedRandomizeText() {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <svg
-            width="68"
-            height="84"
+            width="88"
+            height="108"
             viewBox="0 0 64 64"
             className="inline-block"
             style={{
@@ -116,8 +116,8 @@ export default function AnimatedRandomizeText() {
           transition={{ duration: 0.6, delay: 0.5 }}
         >
           <svg
-            width="68"
-            height="84"
+            width="88"
+            height="108"
             viewBox="0 0 64 64"
             className="inline-block"
             style={{
@@ -158,8 +158,8 @@ export default function AnimatedRandomizeText() {
           transition={{ duration: 0.6, delay: 0.6 }}
         >
           <svg
-            width="68"
-            height="84"
+            width="88"
+            height="108"
             viewBox="0 0 64 64"
             className="inline-block"
             style={{
@@ -200,8 +200,8 @@ export default function AnimatedRandomizeText() {
           transition={{ duration: 0.6, delay: 0.7 }}
         >
           <svg
-            width="68"
-            height="84"
+            width="88"
+            height="108"
             viewBox="0 0 64 64"
             className="inline-block"
             style={{
@@ -251,8 +251,8 @@ export default function AnimatedRandomizeText() {
           transition={{ duration: 0.6, delay: 0.8 }}
         >
           <svg
-            width="76"
-            height="84"
+            width="96"
+            height="108"
             viewBox="0 0 64 64"
             className="inline-block"
             style={{
@@ -293,8 +293,8 @@ export default function AnimatedRandomizeText() {
           transition={{ duration: 0.6, delay: 0.9 }}
         >
           <svg
-            width="70"
-            height="90"
+            width="90"
+            height="114"
             viewBox="0 0 64 64"
             className="inline-block"
             style={{
@@ -335,8 +335,8 @@ export default function AnimatedRandomizeText() {
           transition={{ duration: 0.6, delay: 1.0 }}
         >
           <svg
-            width="68"
-            height="84"
+            width="88"
+            height="108"
             viewBox="0 0 64 64"
             className="inline-block"
             style={{
@@ -377,8 +377,8 @@ export default function AnimatedRandomizeText() {
           transition={{ duration: 0.6, delay: 1.1 }}
         >
           <svg
-            width="64"
-            height="84"
+            width="84"
+            height="108"
             viewBox="0 0 64 64"
             className="inline-block"
             style={{

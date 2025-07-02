@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from "framer-motion";
-import NeonGlassCard from "./NeonGlassCard";
+import GlassmorphismCard from "./GlassmorphismCard";
 import {
   ClipboardDocumentCheckIcon,
   UsersIcon,
@@ -187,7 +187,7 @@ export default function Planofaction() {
         </motion.header>
 
         <motion.dl
-          className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-16 text-base leading-7 text-[#f5f5f5] sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:gap-x-32 lg:gap-y-20"
+          className="mx-auto mt-16 grid max-w-6xl grid-cols-1 gap-8 text-base leading-7 text-[#f5f5f5] sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:gap-x-8 lg:gap-y-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -199,7 +199,7 @@ export default function Planofaction() {
               variants={cardVariants}
               className="flex justify-center w-full"
             >
-              <NeonGlassCard
+              <GlassmorphismCard
                 title={feature.name}
                 subtitle={feature.subtitle}
                 features={feature.features}
