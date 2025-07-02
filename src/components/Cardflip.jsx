@@ -97,15 +97,21 @@ export default function CardFlip({
             absolute inset-0 w-full h-full
             [backface-visibility:hidden] [transform:rotateY(0deg)]
             overflow-hidden rounded-2xl lg:rounded-3xl
-            bg-gradient-to-br from-[#1e0f4a] via-[#2a1255] to-[#1a0b3d] border ${colors.border}
+            bg-gradient-to-br from-[#2a1562] via-[#3d1f70] to-[#2a1562] 
+            border-2 ${colors.border}
             shadow-2xl ${colors.glow}
+            backdrop-blur-sm
             transition-all duration-700
             group-hover:shadow-3xl group-hover:${colors.glow}
+            group-hover:border-opacity-60
             ${isFlipped ? "opacity-0" : "opacity-100"}
           `}
         >
-          {/* Animated background gradient */}
-          <div className={`absolute inset-0 bg-gradient-to-br ${backgroundColor} opacity-60`} />
+          {/* Stronger background gradient overlay for contrast */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${backgroundColor} opacity-80`} />
+          
+          {/* Additional contrast layer */}
+          <div className="absolute inset-0 bg-black/20 rounded-2xl lg:rounded-3xl" />
           
           {/* Animated particles/dots */}
           <div className="absolute inset-0 overflow-hidden">
@@ -167,16 +173,22 @@ export default function CardFlip({
             absolute inset-0 w-full h-full
             [backface-visibility:hidden] [transform:rotateY(180deg)]
             ${config.backPadding} rounded-2xl lg:rounded-3xl
-            bg-gradient-to-br from-[#1e0f4a] via-[#2a1255] to-[#1a0b3d] border ${colors.border}
+            bg-gradient-to-br from-[#2a1562] via-[#3d1f70] to-[#2a1562] 
+            border-2 ${colors.border}
             shadow-2xl ${colors.glow}
+            backdrop-blur-sm
             flex flex-col
             transition-all duration-700
             group-hover:shadow-3xl group-hover:${colors.glow}
+            group-hover:border-opacity-60
             ${!isFlipped ? "opacity-0" : "opacity-100"}
           `}
         >
-          {/* Back background gradient */}
-          <div className={`absolute inset-0 bg-gradient-to-br ${backgroundColor} opacity-40 rounded-2xl lg:rounded-3xl`} />
+          {/* Back background gradient with better contrast */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${backgroundColor} opacity-60 rounded-2xl lg:rounded-3xl`} />
+          
+          {/* Additional contrast layer */}
+          <div className="absolute inset-0 bg-black/15 rounded-2xl lg:rounded-3xl" />
           
           <div className="relative flex-1 flex flex-col">
             {/* Header */}

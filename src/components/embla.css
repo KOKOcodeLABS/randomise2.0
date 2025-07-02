@@ -1,0 +1,233 @@
+/* Hi-tech Embla Carousel Styles */
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-30px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100vw); }
+}
+
+@keyframes scan-fast {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(34, 211, 238, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(34, 211, 238, 0.6); }
+}
+
+/* Animation classes */
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-delayed { animation: float-delayed 8s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 10s ease-in-out infinite; }
+.animate-scan { animation: scan 3s linear infinite; }
+.animate-scan-fast { animation: scan-fast 1s linear infinite; }
+.animate-twinkle { animation: twinkle 2s ease-in-out infinite; }
+
+/* Animation delays */
+.animation-delay-200 { animation-delay: 200ms; }
+.animation-delay-300 { animation-delay: 300ms; }
+.animation-delay-400 { animation-delay: 400ms; }
+.animation-delay-600 { animation-delay: 600ms; }
+.animation-delay-900 { animation-delay: 900ms; }
+
+/* Hi-tech Embla Styles */
+.embla-hitech {
+  position: relative;
+  max-width: 100%;
+}
+
+.embla__viewport-hitech {
+  overflow: hidden;
+  width: 100%;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.6));
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: -1rem;
+  align-items: flex-start;
+}
+
+.embla__slide-hitech {
+  flex: 0 0 90%;
+  min-width: 0;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.embla__slide__img-hitech {
+  border-radius: 0.75rem;
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  filter: contrast(1.1) saturate(1.1);
+}
+
+.embla__controls-hitech {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.embla__buttons-hitech {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.embla__button-hitech {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.embla__button-hitech:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.embla__button-hitech:disabled:hover {
+  background-color: rgba(30, 41, 59, 0.8);
+  border-color: rgba(71, 85, 105, 0.5);
+  box-shadow: none;
+}
+
+.embla__dots-hitech {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.embla__dot-hitech {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+}
+
+.embla__dot-hitech:hover {
+  transform: scale(1.25);
+}
+
+/* Additional interactive styles */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Modal animations */
+@keyframes modal-appear {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-enter {
+  animation: modal-appear 0.3s ease-out;
+}
+
+/* Enhanced hover effects */
+.embla__slide-hitech:hover .scan-line {
+  animation: scan-fast 0.8s linear infinite;
+}
+
+/* Interactive pulse border */
+@keyframes pulse-border {
+  0%, 100% { border-color: rgba(34, 211, 238, 0); }
+  50% { border-color: rgba(34, 211, 238, 0.5); }
+}
+
+.group:hover .pulse-border {
+  animation: pulse-border 2s ease-in-out infinite;
+}
+
+/* Tooltip styles */
+.tooltip {
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .embla__slide-hitech {
+    flex: 0 0 100%;
+  }
+  
+  .embla__slide__img-hitech {
+    height: 320px;
+  }
+  
+  .embla__controls-hitech {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .embla__buttons-hitech {
+    order: 1;
+  }
+  
+  .embla__dots-hitech {
+    order: 2;
+  }
+  
+  .embla__button-hitech {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .embla__button__svg-hitech {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .embla__slide__img-hitech {
+    height: 240px;
+  }
+  
+  .embla__button-hitech {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .embla__button__svg-hitech {
+    width: 1rem;
+    height: 1rem;
+  }
+}

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
 
 @theme {
   /* Spacing Scale */
@@ -83,7 +84,7 @@
   --color-primary-dark: var(--color-brand-violet);
   --color-secondary: var(--color-brand-deep-pink);
   --color-accent: var(--color-brand-rose);
-  
+
   /* UI Colors */
   --color-background: radial-gradient(ellipse at center, #1a0b3d 0%, #0d0618 50%, #000000 100%);
   --color-background-solid: #0d0618;
@@ -739,23 +740,23 @@
   .bg-brand-gradient-primary { 
     background: linear-gradient(135deg, var(--color-brand-deep-blue), var(--color-brand-purple-violet), var(--color-brand-deep-pink)); 
   }
-  
+
   .bg-brand-gradient-blue { 
     background: linear-gradient(135deg, var(--color-brand-deep-blue), var(--color-brand-blue-violet), var(--color-brand-violet)); 
   }
-  
+
   .bg-brand-gradient-purple { 
     background: linear-gradient(135deg, var(--color-brand-violet), var(--color-brand-purple-violet), var(--color-brand-purple)); 
   }
-  
+
   .bg-brand-gradient-pink { 
     background: linear-gradient(135deg, var(--color-brand-deep-pink), var(--color-brand-crimson), var(--color-brand-rose)); 
   }
-  
+
   .bg-brand-gradient-dark { 
     background: radial-gradient(ellipse at center, #1a0b3d 0%, #0d0618 50%, #000000 100%); 
   }
-  
+
   .bg-brand-gradient-soft { 
     background: linear-gradient(135deg, rgba(45, 15, 247, 0.2), rgba(161, 15, 242, 0.2), rgba(242, 0, 89, 0.2)); 
   }
@@ -767,7 +768,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  
+
   .text-gradient-accent { 
     background: var(--gradient-accent);
     background-clip: text;
@@ -779,23 +780,23 @@
   .bg-dark-primary { background: var(--color-background-solid); }
   .bg-dark-surface { background: var(--color-surface); }
   .bg-dark-card { background: var(--color-card); }
-  
+
   /* Gradient Background Utilities */
   .bg-gradient-dark { background: radial-gradient(ellipse at center, #1a0b3d 0%, #0d0618 50%, #000000 100%); }
   .bg-gradient-dark-card { background: linear-gradient(135deg, #1e0f4a 0%, #2a1255 100%); }
-  
+
   /* Border Utilities with Brand Colors */
   .border-brand { border-color: rgba(161, 15, 242, 0.2); }
   .border-brand-light { border-color: rgba(161, 15, 242, 0.1); }
   .border-brand-strong { border-color: rgba(161, 15, 242, 0.4); }
-  
+
   /* Glass Effect Utilities */
   .glass-effect {
     background: rgba(26, 11, 61, 0.2);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(161, 15, 242, 0.2);
   }
-  
+
   .glass-effect-strong {
     background: rgba(26, 11, 61, 0.4);
     backdrop-filter: blur(16px);
@@ -803,7 +804,7 @@
   }
 
   /* ===== ENHANCED TEXT STYLING UTILITIES ===== */
-  
+
   /* Gradient Text Effects */
   .text-gradient-primary {
     background: linear-gradient(135deg, var(--color-brand-deep-blue), var(--color-brand-purple-violet));
@@ -812,7 +813,7 @@
     -webkit-text-fill-color: transparent;
     font-weight: 700;
   }
-  
+
   .text-gradient-secondary {
     background: linear-gradient(135deg, var(--color-brand-deep-pink), var(--color-brand-rose));
     background-clip: text;
@@ -820,7 +821,7 @@
     -webkit-text-fill-color: transparent;
     font-weight: 700;
   }
-  
+
   .text-gradient-full {
     background: linear-gradient(135deg, var(--color-brand-deep-blue), var(--color-brand-purple-violet), var(--color-brand-deep-pink), var(--color-brand-rose));
     background-clip: text;
@@ -830,7 +831,7 @@
     background-size: 200% 200%;
     animation: gradientShift 4s ease-in-out infinite;
   }
-  
+
   @keyframes gradientShift {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -840,15 +841,15 @@
   .text-shadow-sm {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   }
-  
+
   .text-shadow-md {
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(161, 15, 242, 0.2);
   }
-  
+
   .text-shadow-lg {
     text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(161, 15, 242, 0.3);
   }
-  
+
   .text-shadow-glow {
     text-shadow: 0 0 6px rgba(161, 15, 242, 0.4), 0 0 12px rgba(161, 15, 242, 0.2);
   }
@@ -862,7 +863,7 @@
       0 0 15px currentColor,
       0 0 20px currentColor;
   }
-  
+
   .text-neon-pink {
     color: var(--color-brand-deep-pink);
     text-shadow: 
@@ -871,7 +872,7 @@
       0 0 15px currentColor,
       0 0 20px currentColor;
   }
-  
+
   /* @keyframes neonFlicker {
     0%, 18%, 22%, 25%, 53%, 57%, 100% {
       text-shadow: 
@@ -897,7 +898,7 @@
     color: #f8f9fa;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
-  
+
   .text-subtitle {
     font-weight: 500;
     letter-spacing: 0.025em;
@@ -905,7 +906,7 @@
     opacity: 0.9;
     line-height: 1.6;
   }
-  
+
   .text-description {
     color: #cbd5e1;
     font-weight: 400;
@@ -918,7 +919,7 @@
     transition: all 0.3s ease;
     cursor: default;
   }
-  
+
   .text-hover-glow:hover {
     color: var(--color-brand-purple-violet);
     text-shadow: 0 0 8px rgba(161, 15, 242, 0.6), 0 0 16px rgba(161, 15, 242, 0.4);
@@ -934,10 +935,10 @@
     background: linear-gradient(135deg, #ffffff 0%, var(--color-brand-purple-violet) 50%, var(--color-brand-deep-pink) 100%);
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    /* -webkit-text-fill-color: transparent; */
     text-shadow: 2px 4px 20px rgba(161, 15, 242, 0.3);
   }
-  
+
   .heading-section {
     font-size: clamp(1.875rem, 4vw, 3rem);
     font-weight: 800;
@@ -946,13 +947,14 @@
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4), 0 4px 20px rgba(161, 15, 242, 0.2);
     margin-bottom: 1rem;
   }
-  
+
   .heading-card {
     font-size: clamp(1.25rem, 2.5vw, 1.875rem);
     font-weight: 700;
     letter-spacing: -0.02em;
     color: #f8f9fa;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    padding-bottom: 5rem;
   }
 
   /* Text Selection Enhancement */
@@ -960,35 +962,181 @@
     background: rgba(161, 15, 242, 0.3);
     color: #ffffff;
   }
-  
+
   ::-moz-selection {
     background: rgba(161, 15, 242, 0.3);
     color: #ffffff;
   }
 
-  /* ===== ADDITIONAL GRADIENT UTILITIES FOR PROJECTS ===== */
-  /* Brand Gradient Backgrounds */
-  .bg-brand-gradient-primary { 
-    background: linear-gradient(135deg, var(--color-brand-deep-blue), var(--color-brand-purple-violet), var(--color-brand-deep-pink)); 
+  /* ===== ANIMATED TEXT STYLES ===== */
+  .dash-animate {
+    animation: dashArray 3s ease-in-out infinite,
+               dashOffset 3s linear infinite;
   }
-  
-  .bg-brand-gradient-blue { 
-    background: linear-gradient(135deg, var(--color-brand-deep-blue), var(--color-brand-blue-violet), var(--color-brand-violet)); 
+
+  .spin-animate {
+    animation: spinDashArray 3s ease-in-out infinite,
+               spin 8s ease-in-out infinite,
+               dashOffset 3s linear infinite;
+    transform-origin: center;
   }
-  
-  .bg-brand-gradient-purple { 
-    background: linear-gradient(135deg, var(--color-brand-violet), var(--color-brand-purple-violet), var(--color-brand-purple)); 
+
+  @keyframes dashArray {
+    0% {
+      stroke-dasharray: 0 1 359 0;
+    }
+    50% {
+      stroke-dasharray: 0 359 1 0;
+    }
+    100% {
+      stroke-dasharray: 359 1 0 0;
+    }
   }
-  
-  .bg-brand-gradient-pink { 
-    background: linear-gradient(135deg, var(--color-brand-deep-pink), var(--color-brand-crimson), var(--color-brand-rose)); 
+
+  @keyframes spinDashArray {
+    0% {
+      stroke-dasharray: 270 90;
+    }
+    50% {
+      stroke-dasharray: 0 360;
+    }
+    100% {
+      stroke-dasharray: 270 90;
+    }
   }
-  
-  .bg-brand-gradient-dark { 
-    background: radial-gradient(ellipse at center, #1a0b3d 0%, #0d0618 50%, #000000 100%); 
+
+  @keyframes dashOffset {
+    0% {
+      stroke-dashoffset: 365;
+    }
+    100% {
+      stroke-dashoffset: 5;
+    }
   }
-  
-  .bg-brand-gradient-soft { 
-    background: linear-gradient(135deg, rgba(45, 15, 247, 0.2), rgba(161, 15, 242, 0.2), rgba(242, 0, 89, 0.2)); 
+
+  @keyframes spin {
+    0% {
+      rotate: 0deg;
+    }
+    12.5%, 25% {
+      rotate: 270deg;
+    }
+    37.5%, 50% {
+      rotate: 540deg;
+    }
+    62.5%, 75% {
+      rotate: 810deg;
+    }
+    87.5%, 100% {
+      rotate: 1080deg;
+    }
   }
+}
+
+/* ===== PARALLAX ANIMATIONS ===== */
+@keyframes twinkle {
+  0%, 100% { 
+    opacity: 0; 
+    transform: scale(0.8); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.2); 
+  }
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-20px); 
+  }
+}
+
+@keyframes float-delayed {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-30px); 
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-15px); 
+  }
+}
+
+/* Animation Classes */
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 8s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+/* Animation Delays */
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animation-delay-600 {
+  animation-delay: 600ms;
+}
+
+.animation-delay-700 {
+  animation-delay: 700ms;
+}
+
+.animation-delay-800 {
+  animation-delay: 800ms;
+}
+
+.animation-delay-900 {
+  animation-delay: 900ms;
+}
+
+.animation-delay-1100 {
+  animation-delay: 1100ms;
+}
+
+.animation-delay-1200 {
+  animation-delay: 1200ms;
+}
+
+.animation-delay-1500 {
+  animation-delay: 1500ms;
+}
+
+/* Performance Optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Smooth scrolling for better parallax effect */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent horizontal overflow from parallax elements */
+body {
+  overflow-x: hidden;
 }
