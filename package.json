@@ -34,6 +34,7 @@
     "react-simple-typewriter": "^5.0.1",
     "react-spring": "^10.0.1",
     "scroll-out": "^2.2.12",
+    "styled-components": "^6.1.19",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.178.0"

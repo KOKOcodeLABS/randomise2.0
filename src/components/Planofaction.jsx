@@ -12,6 +12,7 @@ import {
   AcademicCapIcon,
   CheckCircleIcon,
 } from "@heroicons/react/20/solid";
+import Planofaction_text from "./Planofaction_text";
 
 const features = [
   {
@@ -169,13 +170,13 @@ export default function Planofaction() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <motion.h1
+          <motion.div
             id="plan-heading"
-            className="mt-2 heading-hero text-center relative"
+            className="mt-2 text-center relative"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2 }}
           >
-            Plan Of Action
+            <Planofaction_text />
             <motion.div
               className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#2D0FF7] via-[#A10FF2] to-[#F20059] rounded-full"
               initial={{ width: 0 }}
@@ -183,7 +184,7 @@ export default function Planofaction() {
               transition={{ duration: 0.8, delay: 0.3 }}
               viewport={{ once: true }}
             />
-          </motion.h1>
+          </motion.div>
         </motion.header>
 
         <motion.dl

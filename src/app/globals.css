@@ -1140,3 +1140,20 @@ html {
 body {
   overflow-x: hidden;
 }
+
+/* ===== ANIMATED HEADING BUTTON STYLES ===== */
+/* Animated text effect for Plan of Action heading */
+.animated-heading-button:hover .hover-text {
+  width: 100% !important;
+  filter: drop-shadow(0 0 23px var(--animation-color)) !important;
+}
+
+/* Enhanced glow effect for the animated heading */
+.animated-heading-button:hover {
+  filter: drop-shadow(0 0 15px rgba(161, 15, 242, 0.4));
+}
+
+/* Smooth transitions for better user experience */
+.animated-heading-button .hover-text {
+  transition: width 0.5s ease-in-out, filter 0.3s ease-in-out !important;
+}

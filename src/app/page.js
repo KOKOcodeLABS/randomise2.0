@@ -1,5 +1,5 @@
 import About from "@/components/About";
-import Events from "@/components/Events";
+import NewEvents from "@/components/NewEvents";
 import Landing from "@/components/Landing";
 import Planofaction from "@/components/Planofaction";
 import Projects from "@/components/Projects";
@@ -13,7 +13,7 @@ export default function Home(){
     <About />
     <Planofaction />
     <Projects />
-    <Events />
+    <NewEvents />
     <Faqs />
     </>
   )

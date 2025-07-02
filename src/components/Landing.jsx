@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import AnimatedRandomizeText from "./AnimatedRandomizeText";
+import RhythmicWords from "./RhythmicWords";
 import Floating, { FloatingElement } from "@/fancy/components/image/parallax-floating";
 
 export default function Landing() {
@@ -156,35 +157,7 @@ export default function Landing() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                <h1 className="text-[10vw] text-center md:text-[15vw] lg:text-5xl leading-none select-none tracking-tightest font-extrabold flex flex-col lg:flex-row mt-4 gap-2 justify-center items-center">
-                  <motion.span
-                    data-content="Ideate."
-                    className="relative block text-gradient-primary text-shadow-glow flex-row"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 0.7 }}
-                  >
-                    Ideate.
-                  </motion.span>
-                  <motion.span
-                    data-content="Commit."
-                    className="relative block text-gradient-secondary text-shadow-glow flex-row"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.9 }}
-                  >
-                    Commit.
-                  </motion.span>
-                  <motion.span
-                    data-content="Succeed."
-                    className="relative block text-gradient-full text-shadow-glow flex-row"
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 1.1 }}
-                  >
-                    Succeed.
-                  </motion.span>
-                </h1>
+                <RhythmicWords />
               </motion.div>
             </FloatingElement>
           </FloatingElement>

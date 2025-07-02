@@ -3,6 +3,7 @@
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useEffect, useRef, forwardRef } from "react";
 import Floating, { FloatingElement } from '@/fancy/components/image/parallax-floating';
+import AboutUs_text from "./AboutUs_text";
 
 // package required for Next.js
 // npm install framer-motion
@@ -93,15 +94,14 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <motion.h1 
+              <motion.div
                 id="about-heading"
-                className="heading-section text-neon-pink"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                About us
-              </motion.h1>
+                <AboutUs_text />
+              </motion.div>
               <motion.p 
                 className="mt-6 text-lg md:text-xl leading-8 text-description text-shadow-sm"
                 initial={{ opacity: 0, y: 20 }}
