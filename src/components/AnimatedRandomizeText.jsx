@@ -13,7 +13,9 @@ export default function AnimatedRandomizeText() {
     m: '#007CFF',
     i: '#FFC800',
     z: '#F0F',
-    e: '#00DA72'
+    e: '#00DA72',
+    openParen: '#973BED',
+    closeParen: '#007CFF'
   };
 
   return (
@@ -402,6 +404,48 @@ export default function AnimatedRandomizeText() {
               d="M 12,8 L 12,56 M 12,8 L 48,8 M 12,32 L 40,32 M 12,56 L 48,56"
               fill="none"
               stroke="url(#gradient-e)"
+              strokeWidth="6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              pathLength="360"
+              className="dash-animate"
+            />
+          </svg>
+        </motion.div>
+
+        {/* Parentheses () */}
+        <motion.div 
+          className="relative inline-block mx-1"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.2 }}
+        >
+          <svg
+            width="88"
+            height="108"
+            viewBox="0 0 64 64"
+            className="inline-block"
+            style={{
+              filter: `drop-shadow(0 0 8px ${gradientColors.openParen}40)`,
+            }}
+          >
+            <defs>
+              <linearGradient
+                id="gradient-parens"
+                gradientUnits="userSpaceOnUse"
+                x1="0"
+                y1="2"
+                x2="0"
+                y2="62"
+              >
+                <stop stopColor={gradientColors.openParen} />
+                <stop offset="1" stopColor="#00DA72" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M 24,8 Q 8,32 24,56 M 40,8 Q 56,32 40,56"
+              fill="none"
+              stroke="url(#gradient-parens)"
               strokeWidth="6"
               strokeLinecap="round"
               strokeLinejoin="round"
