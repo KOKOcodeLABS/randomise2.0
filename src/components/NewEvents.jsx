@@ -90,7 +90,6 @@ const eventsData = [
 const NewEvents = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [isAutoplay, setIsAutoplay] = useState(true);
 
   // Get unique categories
   const categories = ['All', ...new Set(eventsData.map(event => event.category))];
@@ -102,14 +101,12 @@ const NewEvents = () => {
 
   // Auto-slide functionality
   useEffect(() => {
-    if (!isAutoplay) return;
-    
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % filteredEvents.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [filteredEvents.length, isAutoplay]);
+  }, [filteredEvents.length]);
 
   // Reset index when category changes
   useEffect(() => {
@@ -314,18 +311,6 @@ const NewEvents = () => {
                 <ChevronRightIcon className="w-6 h-6" />
               </motion.button>
             </div>
-
-            {/* Autoplay Toggle */}
-            <button
-              onClick={() => setIsAutoplay(!isAutoplay)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                isAutoplay 
-                  ? 'bg-purple-600/20 text-purple-300 border border-purple-500' 
-                  : 'bg-gray-800/50 text-gray-400 border border-gray-700'
-              }`}
-            >
-              {isAutoplay ? 'Pause' : 'Play'} Slideshow
-            </button>
 
             {/* Slide Indicators */}
             <div className="flex gap-2">

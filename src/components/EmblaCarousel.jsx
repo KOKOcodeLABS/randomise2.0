@@ -119,7 +119,6 @@ const EmblaCarousel = (props) => {
 
   const [isMobile, setIsMobile] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [autoplay, setAutoplay] = useState(true);
 
   useCarouselKeyboardNavigation(
     containerRef,
@@ -129,7 +128,7 @@ const EmblaCarousel = (props) => {
 
   // Auto-play functionality
   useEffect(() => {
-    if (!autoplay || !emblaApi) return;
+    if (!emblaApi) return;
 
     const autoplayInterval = setInterval(() => {
       if (emblaApi.canScrollNext()) {
@@ -140,7 +139,7 @@ const EmblaCarousel = (props) => {
     }, 4000);
 
     return () => clearInterval(autoplayInterval);
-  }, [emblaApi, autoplay]);
+  }, [emblaApi]);
 
   // Update selected index when embla changes
   useEffect(() => {
@@ -153,10 +152,6 @@ const EmblaCarousel = (props) => {
     emblaApi.on('select', onSelect);
     return () => emblaApi.off('select', onSelect);
   }, [emblaApi]);
-
-  // Pause autoplay on hover
-  const handleMouseEnter = () => setAutoplay(false);
-  const handleMouseLeave = () => setAutoplay(true);
 
   useEffect(() => {
     // Initialize isMobile state after component mounts (client-side only)
@@ -171,17 +166,7 @@ const EmblaCarousel = (props) => {
     <div
       ref={containerRef}
       className="relative w-full max-w-7xl mx-auto px-6 py-12 rounded-3xl bg-gradient-to-br from-slate-800/50 via-slate-900/50 to-slate-800/50 backdrop-blur-sm border border-slate-700/50 shadow-2xl"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
-      {/* Autoplay indicator */}
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex items-center gap-2 bg-slate-800/60 backdrop-blur-sm px-3 py-1 rounded-full border border-slate-600/30">
-        <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${autoplay ? 'bg-green-400 animate-pulse' : 'bg-red-400'}`}></div>
-        <span className="text-xs text-slate-300 font-medium">
-          {autoplay ? 'AUTO' : 'PAUSED'}
-        </span>
-      </div>
-
       {/* Hi-tech corner decorations */}
       <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-cyan-400 rounded-tl-lg"></div>
       <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-purple-400 rounded-tr-lg"></div>
