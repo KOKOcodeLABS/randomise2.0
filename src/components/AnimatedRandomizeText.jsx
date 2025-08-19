@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 export default function AnimatedRandomizeText() {
   // Define fixed gradient colors
@@ -18,26 +19,72 @@ export default function AnimatedRandomizeText() {
     closeParen: '#007CFF'
   };
 
+  const containerRef = useRef(null);
+  const contentRef = useRef(null);
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    if (!containerRef.current || !contentRef.current) return;
+
+    const recalc = () => {
+      const containerWidth = containerRef.current.offsetWidth;
+      const contentRect = contentRef.current.getBoundingClientRect();
+      const rawContentWidth = contentRef.current.scrollWidth; // pre-scale intrinsic width
+      if (!rawContentWidth) return;
+      // First pass scale based on intrinsic width (add margin safety 2%)
+      let targetScale = Math.min(1, (containerWidth * 0.94) / rawContentWidth);
+      // Allow smaller minimum when very tight screens
+      targetScale = Math.max(0.35, targetScale);
+      // Apply provisional scale
+      setScale(targetScale);
+      // After next paint verify does it still overflow due to rounding / shadows
+      requestAnimationFrame(() => {
+        const rect = contentRef.current.getBoundingClientRect();
+        if (rect.width > containerWidth) {
+          const adjustScale = targetScale * (containerWidth * 0.96) / rect.width; // second pass
+          setScale(Math.max(0.3, adjustScale));
+        }
+      });
+    };
+
+    const resizeObserver = new ResizeObserver(recalc);
+
+    resizeObserver.observe(containerRef.current);
+    if (contentRef.current) resizeObserver.observe(contentRef.current);
+
+    // Initial measurement
+  setTimeout(recalc, 0);
+
+    return () => resizeObserver.disconnect();
+  }, []);
+
   return (
     <motion.div 
-      className="flex items-center justify-center mb-8"
+      ref={containerRef}
+  className="flex items-center justify-center mb-8 w-full overflow-hidden px-2 sm:px-4"
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1, delay: 0.2 }}
     >
-      <div className="flex items-center">
+      <div
+        ref={contentRef}
+        style={{ transform: `scale(${scale})`, transformOrigin: 'center', transition: 'transform 0.35s ease' }}
+  className="flex items-center whitespace-nowrap max-w-full" aria-label="Randomize()"
+      >
+        <span className="sr-only">Randomize()</span>
         {/* Letter R */}
         <motion.div 
-          className="relative inline-block mx-1"
+          className="relative inline-block mx-[clamp(1px,0.6vw,5px)]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <svg
+            /* Responsive width/height via clamp; fallback width/height attributes retained by browser if classes unsupported */
             width="88"
             height="108"
             viewBox="0 0 64 64"
-            className="inline-block"
+            className="inline-block w-[clamp(34px,8vw,88px)] h-[clamp(44px,10vw,108px)]"
             style={{
               filter: `drop-shadow(0 0 8px ${gradientColors.r}40)`,
             }}
@@ -70,7 +117,7 @@ export default function AnimatedRandomizeText() {
 
         {/* Letter A */}
         <motion.div 
-          className="relative inline-block mx-1"
+          className="relative inline-block mx-[clamp(1px,0.6vw,5px)]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -79,7 +126,7 @@ export default function AnimatedRandomizeText() {
             width="88"
             height="108"
             viewBox="0 0 64 64"
-            className="inline-block"
+            className="inline-block w-[clamp(34px,8vw,88px)] h-[clamp(44px,10vw,108px)]"
             style={{
               filter: `drop-shadow(0 0 8px ${gradientColors.a}40)`,
             }}
@@ -112,7 +159,7 @@ export default function AnimatedRandomizeText() {
 
         {/* Letter N */}
         <motion.div 
-          className="relative inline-block mx-1"
+          className="relative inline-block mx-[clamp(1px,0.6vw,5px)]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
@@ -121,7 +168,7 @@ export default function AnimatedRandomizeText() {
             width="88"
             height="108"
             viewBox="0 0 64 64"
-            className="inline-block"
+            className="inline-block w-[clamp(34px,8vw,88px)] h-[clamp(44px,10vw,108px)]"
             style={{
               filter: `drop-shadow(0 0 8px ${gradientColors.n}40)`,
             }}
@@ -154,7 +201,7 @@ export default function AnimatedRandomizeText() {
 
         {/* Letter D */}
         <motion.div 
-          className="relative inline-block mx-1"
+          className="relative inline-block mx-[clamp(1px,0.6vw,5px)]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
@@ -163,7 +210,7 @@ export default function AnimatedRandomizeText() {
             width="88"
             height="108"
             viewBox="0 0 64 64"
-            className="inline-block"
+            className="inline-block w-[clamp(34px,8vw,88px)] h-[clamp(44px,10vw,108px)]"
             style={{
               filter: `drop-shadow(0 0 8px ${gradientColors.d}40)`,
             }}
@@ -196,7 +243,7 @@ export default function AnimatedRandomizeText() {
 
         {/* Letter O */}
         <motion.div 
-          className="relative inline-block mx-1"
+          className="relative inline-block mx-[clamp(1px,0.6vw,5px)]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
@@ -205,7 +252,7 @@ export default function AnimatedRandomizeText() {
             width="88"
             height="108"
             viewBox="0 0 64 64"
-            className="inline-block"
+            className="inline-block w-[clamp(34px,8vw,88px)] h-[clamp(44px,10vw,108px)]"
             style={{
               filter: `drop-shadow(0 0 8px ${gradientColors.o}40)`,
             }}
@@ -247,7 +294,7 @@ export default function AnimatedRandomizeText() {
 
         {/* Letter M */}
         <motion.div 
-          className="relative inline-block mx-1"
+          className="relative inline-block mx-[clamp(1px,0.6vw,5px)]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
@@ -256,7 +303,7 @@ export default function AnimatedRandomizeText() {
             width="96"
             height="108"
             viewBox="0 0 64 64"
-            className="inline-block"
+            className="inline-block w-[clamp(38px,9vw,94px)] h-[clamp(44px,10vw,108px)]"
             style={{
               filter: `drop-shadow(0 0 8px ${gradientColors.m}40)`,
             }}
@@ -289,7 +336,7 @@ export default function AnimatedRandomizeText() {
 
         {/* Letter I */}
         <motion.div 
-          className="relative inline-block mx-1"
+          className="relative inline-block mx-[clamp(1px,0.6vw,5px)]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.9 }}
@@ -298,7 +345,7 @@ export default function AnimatedRandomizeText() {
             width="90"
             height="114"
             viewBox="0 0 64 64"
-            className="inline-block"
+            className="inline-block w-[clamp(36px,8.5vw,90px)] h-[clamp(48px,11vw,114px)]"
             style={{
               filter: `drop-shadow(0 0 8px ${gradientColors.i}40)`,
             }}
@@ -331,7 +378,7 @@ export default function AnimatedRandomizeText() {
 
         {/* Letter Z */}
         <motion.div 
-          className="relative inline-block mx-1"
+          className="relative inline-block mx-[clamp(1px,0.6vw,5px)]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.0 }}
@@ -340,7 +387,7 @@ export default function AnimatedRandomizeText() {
             width="88"
             height="108"
             viewBox="0 0 64 64"
-            className="inline-block"
+            className="inline-block w-[clamp(34px,8vw,88px)] h-[clamp(44px,10vw,108px)]"
             style={{
               filter: `drop-shadow(0 0 8px ${gradientColors.z}40)`,
             }}
@@ -373,7 +420,7 @@ export default function AnimatedRandomizeText() {
 
         {/* Letter E */}
         <motion.div 
-          className="relative inline-block mx-1"
+          className="relative inline-block mx-[clamp(1px,0.6vw,5px)]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.1 }}
@@ -382,7 +429,7 @@ export default function AnimatedRandomizeText() {
             width="84"
             height="108"
             viewBox="0 0 64 64"
-            className="inline-block"
+            className="inline-block w-[clamp(32px,7.5vw,84px)] h-[clamp(44px,10vw,108px)]"
             style={{
               filter: `drop-shadow(0 0 8px ${gradientColors.e}40)`,
             }}
@@ -415,7 +462,7 @@ export default function AnimatedRandomizeText() {
 
         {/* Parentheses () */}
         <motion.div 
-          className="relative inline-block mx-1"
+          className="relative inline-block mx-[clamp(1px,0.6vw,5px)]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.2 }}
@@ -424,7 +471,7 @@ export default function AnimatedRandomizeText() {
             width="88"
             height="108"
             viewBox="0 0 64 64"
-            className="inline-block"
+            className="inline-block w-[clamp(34px,8vw,88px)] h-[clamp(44px,10vw,108px)]"
             style={{
               filter: `drop-shadow(0 0 8px ${gradientColors.openParen}40)`,
             }}

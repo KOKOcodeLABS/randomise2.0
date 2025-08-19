@@ -12,6 +12,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* Viewport meta for responsive scaling */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body className="relative overflow-x-hidden">
         {/* Global Parallax Container */}
         <Floating 

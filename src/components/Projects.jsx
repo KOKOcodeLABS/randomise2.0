@@ -55,7 +55,7 @@ export default function Projects() {
         scale: 1.02,
         boxShadow: "0 25px 50px -12px rgba(161, 15, 242, 0.3)"
       }}
-      style={{ minHeight: '480px' }}
+  style={{ minHeight: '420px' }}
     >
       {/* Background Image with Enhanced Overlay */}
       <div className="absolute inset-0 z-0">
@@ -72,7 +72,7 @@ export default function Projects() {
       </div>
       
       {/* Enhanced Content with Better Contrast */}
-      <div className="relative z-10 p-8 text-white">
+  <div className="relative z-10 p-6 md:p-8 text-white">
         <motion.div
           className="mb-4"
           initial={{ opacity: 0, y: 20 }}
@@ -85,7 +85,7 @@ export default function Projects() {
         </motion.div>
         
         <motion.h3 
-          className="text-2xl lg:text-3xl font-bold leading-8 text-white mb-4 drop-shadow-lg group-hover:text-gradient-primary transition-all duration-300"
+          className="text-xl sm:text-2xl lg:text-3xl font-bold leading-snug text-white mb-3 md:mb-4 drop-shadow-lg group-hover:text-gradient-primary transition-all duration-300"
           whileHover={{ scale: 1.05, x: 5 }}
         >
           <a 
@@ -97,7 +97,7 @@ export default function Projects() {
         </motion.h3>
         
         <motion.p 
-          className="text-base lg:text-lg text-gray-100 leading-relaxed font-medium drop-shadow-md group-hover:text-white transition-colors duration-300"
+          className="text-sm sm:text-base lg:text-lg text-gray-100 leading-relaxed font-medium drop-shadow-md group-hover:text-white transition-colors duration-300"
           whileHover={{ x: 5 }}
         >
           {project.description}

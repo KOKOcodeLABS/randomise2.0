@@ -4,10 +4,23 @@ import { motion } from "framer-motion";
 import AnimatedRandomizeText from "./AnimatedRandomizeText";
 import RhythmicWords from "./RhythmicWords";
 import Floating, { FloatingElement } from "@/fancy/components/image/parallax-floating";
+import { useEffect, useState } from "react";
 
 export default function Landing() {
+  // Sequencing states
+  const [showRandomize, setShowRandomize] = useState(false);
+  const [showWords, setShowWords] = useState(false);
+
+  useEffect(() => {
+    // Show Randomize text shortly after logo appears
+    const t1 = setTimeout(() => setShowRandomize(true), 900); // after logo fade-in (0.8s)
+    // Show rotating words after Randomize letters finish animating (~1.2s after they start)
+    const t2 = setTimeout(() => setShowWords(true), 900 + 1300);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);
+
   return (
-    <div className="relative isolate overflow-hidden bg-gradient-to-br from-[#0d0618] via-[#1a0b3d] to-[#000000] h-lvh">
+  <div className="relative isolate overflow-hidden bg-gradient-to-br from-[#0d0618] via-[#1a0b3d] to-[#000000] min-h-screen">
       <Floating className="w-full h-full" sensitivity={3} easingFactor={0.15}>
         {/* Background Pattern with Parallax */}
         <FloatingElement depth={0.5} className="absolute inset-0 -z-10 h-full w-full">
@@ -57,12 +70,12 @@ export default function Landing() {
         </FloatingElement>
 
         {/* Main Content Container with Parallax */}
-        <FloatingElement depth={1.2} className="mx-auto max-w-7xl px-6 pb-24 sm:pb-32 flex items-center place-content-center h-lvh w-lvw lg:flex-row flex-col-reverse lg:px-8 lg:py-8 md:px-8" absolute={false}>
-          <FloatingElement depth={1.5} className="mx-auto max-w-7xl px-4 pb-4 md:pb-4 flex-row lg:px-8 lg:pt-10 lg:mt-0 pt-20" absolute={false}>
+  <FloatingElement depth={1.2} className="mx-auto max-w-7xl px-6 flex items-center justify-center min-h-screen w-full lg:px-8 md:px-8" absolute={false}>
+          <FloatingElement depth={1.5} className="mx-auto max-w-7xl px-4 md:px-8 pb-8 flex flex-col items-center justify-center gap-8" absolute={false}>
             {/* Logo Container with Enhanced Parallax */}
-            <FloatingElement depth={2} className="flex place-content-center" absolute={false}>
+            <FloatingElement depth={2} className="flex justify-center items-center" absolute={false}>
               <motion.div 
-                className="relative mt-8 md:-mt-8 h-56 w-56 lg:h-80 lg:w-80"
+                className="relative h-40 w-40 sm:h-48 sm:w-48 md:h-56 md:w-56 lg:h-72 lg:w-72 xl:h-80 xl:w-80"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ 
                   opacity: 1, 
@@ -137,29 +150,33 @@ export default function Landing() {
               </motion.div>
             </FloatingElement>
             
-            {/* Animated Text with Parallax */}
-            <FloatingElement depth={1.8} absolute={false}>
-              <motion.div 
-                className="mx-auto flex-shrink-0 lg:mx-0"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              >
-                <AnimatedRandomizeText />
-              </motion.div>
-            </FloatingElement>
+            {/* Animated Text with Parallax (appears second) */}
+            {showRandomize && (
+              <FloatingElement depth={1.8} absolute={false}>
+                <motion.div 
+                  className="mx-auto flex-shrink-0 lg:mx-0 text-center lg:text-left"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <AnimatedRandomizeText />
+                </motion.div>
+              </FloatingElement>
+            )}
 
-            {/* Title Text with Parallax */}
-            <FloatingElement depth={2.2} absolute={false}>
-              <motion.div 
-                className="mx-auto flex-shrink-0 lg:mx-auto lg:max-w-xl lg:pt-0 flex justify-center"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-              >
-                <RhythmicWords />
-              </motion.div>
-            </FloatingElement>
+            {/* Title Text with Parallax (appears third) */}
+            {showWords && (
+              <FloatingElement depth={2.2} absolute={false}>
+                <motion.div 
+                  className="mx-auto flex-shrink-0 lg:mx-auto lg:max-w-xl flex justify-center text-center lg:text-left"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <RhythmicWords />
+                </motion.div>
+              </FloatingElement>
+            )}
           </FloatingElement>
         </FloatingElement>
       </Floating>

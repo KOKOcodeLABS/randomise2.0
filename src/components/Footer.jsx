@@ -141,9 +141,9 @@ export default function Footer() {
                 </li>
               </ul>
             </motion.div>
-            <motion.div className="col-span-2 sm:col-span-1 flex flex-col items-end pr-4" variants={itemVariants}>
+            <motion.div className="col-span-2 sm:col-span-1 flex flex-col items-start sm:items-end pr-0 sm:pr-4" variants={itemVariants}>
               <h4 className="font-semibold text-white text-shadow-glow">Follow Us</h4>
-              <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-4">
+              <div className="mt-4 grid grid-cols-4 sm:grid-cols-2 gap-x-4 gap-y-4 sm:gap-x-6">
                 {navigation.social.map((item) => (
                   <a
                     key={item.name}

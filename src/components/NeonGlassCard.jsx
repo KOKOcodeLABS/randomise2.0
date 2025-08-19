@@ -54,8 +54,10 @@ const NeonGlassCard = ({
         filter: 'blur(0px)',
         fontFamily: "'Asap', sans-serif",
         color: '#737985',
-        minWidth: '350px',
-        minHeight: '350px',
+  /* Responsive sizing */
+  minWidth: 'min(100%, 340px)',
+  width: '100%',
+  minHeight: '300px',
         borderRadius: 'var(--radius)',
         border: 'var(--border) solid var(--border-color)',
         padding: '1.5em',
