@@ -46,30 +46,24 @@ const Navbar = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between">
                         {/* Logo Section */}
-                        <motion.div 
+                        <motion.div
                             className="flex items-center"
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2 }}
                         >
                             <Link href="/" className="flex items-center group">
-                                <div className="relative h-12 w-12 mr-3 transition-transform duration-300 group-hover:rotate-12">
+                                <div
+                                    className="relative h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 -my-2 md:-my-3 transition-transform duration-300 group-hover:rotate-12"
+                                >
                                     <Image
                                         src="/nav_logo.avif"
-                                        alt="Randomize"
+                                        alt="Randomize Logo"
                                         fill
-                                        className="object-contain"
-                                        sizes="48px"
+                                        className="object-contain drop-shadow-[0_0_6px_rgba(161,15,242,0.35)]"
+                                        sizes="64px"
                                         priority
                                     />
                                 </div>
-                                <motion.span 
-                                    className="text-xl font-bold bg-gradient-to-r from-[#FF6B6B] via-[#4ECDC4] to-[#45B7D1] bg-clip-text text-transparent hidden sm:block"
-                                    whileHover={{ 
-                                        backgroundImage: 'linear-gradient(to right, #4ECDC4, #45B7D1, #96CEB4)' 
-                                    }}
-                                >
-                                    RANDOMIZE
-                                </motion.span>
                             </Link>
                         </motion.div>
 

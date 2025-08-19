@@ -7,6 +7,19 @@ function TeamCard({
   github,
   imgSrc,
 }) {
+  // Derive a safe image source; Next/Image (or plain img) warns on empty string
+  const safeImgSrc = imgSrc && imgSrc.trim() !== "" ? imgSrc : null;
+
+  // Create initials for fallback avatar
+  const initials = name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((n) => n[0]?.toUpperCase())
+    .join("");
+
+  // Normalize LinkedIn links missing protocol
+  const normalizedLinkdn = linkdn && linkdn.startsWith("www.") ? `https://${linkdn}` : linkdn;
   const socials = [
     {
       name: "Github",
@@ -23,7 +36,7 @@ function TeamCard({
     },
     {
       name: "LinkedIn",
-      link: linkdn,
+  link: normalizedLinkdn,
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11.75 20h-3v-11.5h3v11.5zm-1.5-13.1c-.96 0-1.75-.79-1.75-1.75s.79-1.75 1.75-1.75 1.75.79 1.75 1.75-.79 1.75-1.75 1.75zm13.25 13.1h-3v-5.5c0-1.32-.03-3.01-1.83-3.01-1.83 0-2.11 1.43-2.11 2.91v5.6h-3v-11.5h2.88v1.56h.04c.4-.76 1.37-1.56 2.83-1.56 3.03 0 3.59 2 3.59 4.58v6.92z" />
@@ -35,11 +48,22 @@ function TeamCard({
   return (
     <div className="bg-gray-800 max-w-max p-6 text-white inline-block m-6 rounded-lg text-center hover:scale-105">
       <div className="aspect-square overflow-hidden rounded-tl-3xl object-cover rounded-br-3xl flex justify-center mb-5">
-        <img
-          className="w-36 h-36 md:w-44 md:h-44 object-cover"
-          src={imgSrc}
-          alt=""
-        />
+        {safeImgSrc ? (
+          <img
+            className="w-36 h-36 md:w-44 md:h-44 object-cover"
+            src={safeImgSrc}
+            alt={name}
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div
+            className="w-36 h-36 md:w-44 md:h-44 flex items-center justify-center bg-gradient-to-br from-[#2D0FF7] via-[#A10FF2] to-[#F20059] text-white text-4xl md:text-5xl font-semibold select-none"
+            aria-label={name}
+          >
+            {initials || "?"}
+          </div>
+        )}
       </div>
       <h2 className="text-lg md:text-xl mb-3 mt-2">{name}</h2>
       <h5 className=" text-gray-300 text-xs md:text-sm">{position}</h5>
