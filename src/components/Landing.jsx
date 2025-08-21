@@ -70,7 +70,7 @@ export default function Landing() {
         </FloatingElement>
 
         {/* Main Content Container with Parallax */}
-  <FloatingElement depth={1.2} className="mx-auto max-w-7xl px-6 flex items-center justify-center min-h-screen w-full lg:px-8 md:px-8" absolute={false}>
+  <FloatingElement depth={1.2} className="mx-auto max-w-7xl px-6 pt-24 sm:pt-28 md:pt-32 flex items-center justify-center min-h-screen w-full lg:px-8 md:px-8" absolute={false}>
           <FloatingElement depth={1.5} className="mx-auto max-w-7xl px-4 md:px-8 pb-8 flex flex-col items-center justify-center gap-8" absolute={false}>
             {/* Logo Container with Enhanced Parallax */}
             <FloatingElement depth={2} className="flex justify-center items-center" absolute={false}>
