@@ -36,11 +36,12 @@ const RhythmicWords = () => {
               data-content={word.text}
               className={`relative block ${word.color} text-shadow-glow flex-row word-span`}
               animate={{
-                scale: activeIndex === index ? [1, 1.15, 1] : 1,
-                opacity: activeIndex === index ? [0.8, 1, 0.8] : 0.4,
-                filter: activeIndex === index ? 
-                  ['brightness(1) saturate(1)', 'brightness(1.2) saturate(1.3)', 'brightness(1) saturate(1)'] : 
-                  'brightness(0.7) saturate(0.9)',
+                rotateX: activeIndex === index ? [0, -18, 0] : 0,
+                scale: activeIndex === index ? [1, 1.08, 1] : 1,
+                // Ensure readable opacity: active fully visible, others lightly dimmed
+                opacity: activeIndex === index ? [0.98, 1, 0.98] : 0.7,
+                // subtle brightness change only (no blur)
+                filter: activeIndex === index ? ['brightness(1)', 'brightness(1.06)', 'brightness(1)'] : 'brightness(0.95)'
               }}
               transition={{
                 duration: 2,
@@ -48,9 +49,8 @@ const RhythmicWords = () => {
                 times: [0, 0.5, 1],
               }}
               style={{
-                textShadow: activeIndex === index ? 
-                  '0 0 8px currentColor, 0 0 15px currentColor' : 
-                  '0 0 5px currentColor',
+                // Non-blurry, crisp shadow for 3D perception
+                textShadow: activeIndex === index ? '0 6px 0 rgba(0,0,0,0.28)' : '0 3px 0 rgba(0,0,0,0.14)',
               }}
             >
               <motion.span
@@ -74,8 +74,8 @@ const RhythmicWords = () => {
                     className="pulse-ring"
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ 
-                      scale: [0.8, 1.3, 1.8], 
-                      opacity: [0, 0.3, 0] 
+                      scale: [0.8, 1.15, 1.6], 
+                      opacity: [0, 0.25, 0] 
                     }}
                     exit={{ scale: 2, opacity: 0 }}
                     transition={{
@@ -87,15 +87,15 @@ const RhythmicWords = () => {
                 )}
               </AnimatePresence>
 
-              {/* Spotlight effect */}
+              {/* Spotlight effect (kept but without blur) */}
               <AnimatePresence>
                 {activeIndex === index && (
                   <motion.div
                     className="spotlight"
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ 
-                      opacity: [0, 0.2, 0],
-                      scale: [0.5, 1.1, 1.3]
+                      opacity: [0, 0.18, 0],
+                      scale: [0.6, 1.05, 1.2]
                     }}
                     exit={{ opacity: 0, scale: 1.5 }}
                     transition={{
@@ -174,17 +174,34 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+  perspective: 1200px; /* enable 3D perception */
+  -webkit-perspective: 1200px;
   }
 
   .word-span {
     position: relative;
     display: inline-block;
     transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  z-index: 10; /* ensure words sit above decorative layers */
   }
 
   .word-inner {
     position: relative;
     z-index: 2;
+  }
+
+  /* Force a solid readable fallback so text is visible even if gradients or background-clip
+     rules don't apply in some environments. This makes the words visible across browsers. */
+  .word-inner {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background: none !important;
+    z-index: 30;
+    mix-blend-mode: normal;
   }
 
   .pulse-ring {
@@ -197,7 +214,7 @@ const StyledWrapper = styled.div`
     border: 1px solid currentColor;
     border-radius: 50%;
     pointer-events: none;
-    z-index: 1;
+  z-index: 4;
     opacity: 0.6;
   }
 
@@ -210,13 +227,18 @@ const StyledWrapper = styled.div`
     height: 130%;
     background: radial-gradient(
       circle,
-      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.04) 0%,
       rgba(255, 255, 255, 0.02) 30%,
       transparent 60%
     );
     border-radius: 50%;
     pointer-events: none;
-    z-index: 0;
+  z-index: 3;
+  }
+
+  /* Override global glow to remove blur and make crisp 3D shadow */
+  .text-shadow-glow {
+    text-shadow: 0 3px 0 rgba(0,0,0,0.12) !important;
   }
 
   .particles-container {
@@ -227,7 +249,7 @@ const StyledWrapper = styled.div`
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 1;
+  z-index: 3;
   }
 
   .particle {
