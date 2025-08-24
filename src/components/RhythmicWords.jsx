@@ -1,164 +1,163 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import styled from 'styled-components';
 
-const RhythmicWords = () => {
-  const words = [
-    { text: 'Ideate.', color: 'text-gradient-primary', delay: 0 },
-    { text: 'Commit.', color: 'text-gradient-secondary', delay: 2 },
-    { text: 'Succeed.', color: 'text-gradient-full', delay: 4 }
-  ];
+const WORDS = [
+  { text: 'Ideate.', color: 'text-gradient-primary' },
+  { text: 'Commit.', color: 'text-gradient-secondary' },
+  { text: 'Succeed.', color: 'text-gradient-full' }
+];
 
+const PARTICLE_COUNT = 4;
+const PARTICLE_DISTANCE = 60;
+
+const spanVariants = {
+  idle: { rotateX: 0, scale: 1, opacity: 0.75, filter: 'brightness(0.95)' },
+  active: {
+    rotateX: [0, -14, 0],
+    scale: [1, 1.06, 1],
+    opacity: [0.98, 1, 0.98],
+    filter: ['brightness(1)', 'brightness(1.04)', 'brightness(1)'],
+  }
+};
+
+const innerVariants = {
+  idle: { y: 0 },
+  active: { y: [0, -4, 0] }
+};
+
+const pulseVariants = {
+  idle: { scale: 0.9, opacity: 0 },
+  active: { scale: [0.9, 1.1, 1.45], opacity: [0, 0.22, 0] }
+};
+
+const spotlightVariants = {
+  idle: { opacity: 0, scale: 0.6 },
+  active: { opacity: [0, 0.16, 0], scale: [0.6, 1.02, 1.18] }
+};
+
+const particleVariants = {
+  idle: { scale: 0, x: 0, y: 0, opacity: 0 },
+  active: (i) => {
+    const angle = (i * (360 / PARTICLE_COUNT)) * Math.PI / 180;
+    return {
+      scale: [0, 1, 0],
+      x: Math.cos(angle) * PARTICLE_DISTANCE,
+      y: Math.sin(angle) * PARTICLE_DISTANCE,
+      opacity: [0, 0.6, 0]
+    };
+  }
+};
+
+const Word = React.memo(function Word({ word, isActive, reduceMotion }) {
+  const commonTransition = reduceMotion
+    ? { duration: 0.25, ease: 'linear' }
+    : { duration: 1.6, ease: 'easeInOut', times: [0, 0.5, 1] };
+
+  const shortTransition = reduceMotion
+    ? { duration: 0.18, ease: 'linear' }
+    : { duration: 1.2, ease: 'easeOut' };
+
+  return (
+    <motion.span
+      className={`relative block ${word.color} text-shadow-glow flex-row word-span ${isActive ? 'is-active' : ''}`}
+      variants={spanVariants}
+      initial="idle"
+      animate={isActive ? 'active' : 'idle'}
+      transition={commonTransition}
+      style={{ willChange: 'transform, opacity, filter' }}
+    >
+      <motion.span
+        className="word-inner"
+        variants={innerVariants}
+        transition={commonTransition}
+      >
+        {word.text}
+      </motion.span>
+
+      <AnimatePresence>
+        {isActive && (
+          <motion.div
+            className="pulse-ring"
+            variants={pulseVariants}
+            initial="idle"
+            animate="active"
+            exit="idle"
+            transition={shortTransition}
+            aria-hidden
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isActive && (
+          <motion.div
+            className="spotlight"
+            variants={spotlightVariants}
+            initial="idle"
+            animate="active"
+            exit="idle"
+            transition={commonTransition}
+            aria-hidden
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isActive && !reduceMotion && (
+          <div className="particles-container" aria-hidden>
+            {Array.from({ length: PARTICLE_COUNT }).map((_, i) => (
+              <motion.div
+                key={i}
+                className={`particle particle-${i}`}
+                custom={i}
+                variants={particleVariants}
+                initial="idle"
+                animate="active"
+                exit="idle"
+                transition={{ duration: 1.05, ease: 'easeOut', delay: 0.08 }}
+              />
+            ))}
+          </div>
+        )}
+      </AnimatePresence>
+    </motion.span>
+  );
+}, (prev, next) => prev.isActive === next.isActive && prev.word.text === next.word.text);
+
+const RhythmicWords = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [cycle, setCycle] = useState(0);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => {
-        const next = (prev + 1) % words.length;
-        if (next === 0) {
-          setCycle(c => c + 1);
-        }
-        return next;
-      });
-    }, 2000); // Change word every 2 seconds
+    if (reduceMotion) return;
 
-    return () => clearInterval(interval);
-  }, [words.length]);
+    const id = setInterval(() => {
+      setActiveIndex(prev => (prev + 1) % WORDS.length);
+    }, 2000);
+
+    return () => clearInterval(id);
+  }, [reduceMotion]);
 
   return (
     <StyledWrapper>
       <div className="rhythmic-container">
         <h1 className="text-[10vw] text-center md:text-[15vw] lg:text-5xl leading-none select-none tracking-tightest font-extrabold flex flex-col lg:flex-row mt-4 gap-2 justify-center items-center">
-          {words.map((word, index) => (
-            <motion.span
-              key={`${word.text}-${cycle}`}
-              data-content={word.text}
-              className={`relative block ${word.color} text-shadow-glow flex-row word-span`}
-              animate={{
-                rotateX: activeIndex === index ? [0, -18, 0] : 0,
-                scale: activeIndex === index ? [1, 1.08, 1] : 1,
-                // Ensure readable opacity: active fully visible, others lightly dimmed
-                opacity: activeIndex === index ? [0.98, 1, 0.98] : 0.7,
-                // subtle brightness change only (no blur)
-                filter: activeIndex === index ? ['brightness(1)', 'brightness(1.06)', 'brightness(1)'] : 'brightness(0.95)'
-              }}
-              transition={{
-                duration: 2,
-                ease: "easeInOut",
-                times: [0, 0.5, 1],
-              }}
-              style={{
-                // Non-blurry, crisp shadow for 3D perception
-                textShadow: activeIndex === index ? '0 6px 0 rgba(0,0,0,0.28)' : '0 3px 0 rgba(0,0,0,0.14)',
-              }}
-            >
-              <motion.span
-                className="word-inner"
-                animate={{
-                  y: activeIndex === index ? [0, -5, 0] : 0,
-                }}
-                transition={{
-                  duration: 2,
-                  ease: "easeInOut",
-                  times: [0, 0.5, 1],
-                }}
-              >
-                {word.text}
-              </motion.span>
-              
-              {/* Rhythmic pulse ring */}
-              <AnimatePresence>
-                {activeIndex === index && (
-                  <motion.div
-                    className="pulse-ring"
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ 
-                      scale: [0.8, 1.15, 1.6], 
-                      opacity: [0, 0.25, 0] 
-                    }}
-                    exit={{ scale: 2, opacity: 0 }}
-                    transition={{
-                      duration: 2,
-                      ease: "easeOut",
-                      times: [0, 0.3, 1],
-                    }}
-                  />
-                )}
-              </AnimatePresence>
-
-              {/* Spotlight effect (kept but without blur) */}
-              <AnimatePresence>
-                {activeIndex === index && (
-                  <motion.div
-                    className="spotlight"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ 
-                      opacity: [0, 0.18, 0],
-                      scale: [0.6, 1.05, 1.2]
-                    }}
-                    exit={{ opacity: 0, scale: 1.5 }}
-                    transition={{
-                      duration: 2,
-                      ease: "easeInOut",
-                      times: [0, 0.4, 1],
-                    }}
-                  />
-                )}
-              </AnimatePresence>
-
-              {/* Particle burst */}
-              <AnimatePresence>
-                {activeIndex === index && (
-                  <div className="particles-container">
-                    {[...Array(6)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className={`particle particle-${i}`}
-                        initial={{ 
-                          scale: 0, 
-                          x: 0, 
-                          y: 0, 
-                          opacity: 0 
-                        }}
-                        animate={{ 
-                          scale: [0, 1, 0],
-                          x: Math.cos((i * 60) * Math.PI / 180) * 80,
-                          y: Math.sin((i * 60) * Math.PI / 180) * 80,
-                          opacity: [0, 0.6, 0]
-                        }}
-                        exit={{ 
-                          scale: 0, 
-                          opacity: 0 
-                        }}
-                        transition={{
-                          duration: 1.5,
-                          ease: "easeOut",
-                          delay: 0.2,
-                        }}
-                      />
-                    ))}
-                  </div>
-                )}
-              </AnimatePresence>
-            </motion.span>
+          {WORDS.map((word, index) => (
+            <Word key={word.text} word={word} isActive={activeIndex === index} reduceMotion={reduceMotion} />
           ))}
         </h1>
 
-        {/* Progress indicator */}
-        <div className="progress-container">
-          {words.map((_, index) => (
+        <div className="progress-container" aria-hidden>
+          {WORDS.map((_, index) => (
             <motion.div
               key={index}
               className="progress-dot"
               animate={{
-                scale: activeIndex === index ? 1.5 : 1,
-                opacity: activeIndex === index ? 1 : 0.4,
+                scale: activeIndex === index ? 1.4 : 1,
+                opacity: activeIndex === index ? 1 : 0.45,
               }}
-              transition={{
-                duration: 0.3,
-                ease: "easeInOut",
-              }}
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
             />
           ))}
         </div>
@@ -174,34 +173,34 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-  perspective: 1200px; /* enable 3D perception */
-  -webkit-perspective: 1200px;
+    perspective: 1200px;
+    -webkit-perspective: 1200px;
   }
 
   .word-span {
     position: relative;
     display: inline-block;
-    transition: all 0.3s ease;
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  z-index: 10; /* ensure words sit above decorative layers */
+    transition: transform 0.25s ease;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    z-index: 10;
+  }
+
+  .word-span.is-active .word-inner {
+    text-shadow: 0 6px 0 rgba(0,0,0,0.28);
   }
 
   .word-inner {
     position: relative;
     z-index: 2;
-  }
-
-  /* Force a solid readable fallback so text is visible even if gradients or background-clip
-     rules don't apply in some environments. This makes the words visible across browsers. */
-  .word-inner {
     color: #ffffff !important;
     -webkit-text-fill-color: #ffffff !important;
     background: none !important;
     z-index: 30;
     mix-blend-mode: normal;
+    will-change: transform;
   }
 
   .pulse-ring {
@@ -214,8 +213,9 @@ const StyledWrapper = styled.div`
     border: 1px solid currentColor;
     border-radius: 50%;
     pointer-events: none;
-  z-index: 4;
+    z-index: 4;
     opacity: 0.6;
+    will-change: transform, opacity;
   }
 
   .spotlight {
@@ -225,18 +225,13 @@ const StyledWrapper = styled.div`
     transform: translate(-50%, -50%);
     width: 130%;
     height: 130%;
-    background: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.04) 0%,
-      rgba(255, 255, 255, 0.02) 30%,
-      transparent 60%
-    );
+    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 30%, transparent 60%);
     border-radius: 50%;
     pointer-events: none;
-  z-index: 3;
+    z-index: 3;
+    will-change: transform, opacity;
   }
 
-  /* Override global glow to remove blur and make crisp 3D shadow */
   .text-shadow-glow {
     text-shadow: 0 3px 0 rgba(0,0,0,0.12) !important;
   }
@@ -249,7 +244,7 @@ const StyledWrapper = styled.div`
     width: 100%;
     height: 100%;
     pointer-events: none;
-  z-index: 3;
+    z-index: 3;
   }
 
   .particle {
@@ -263,6 +258,7 @@ const StyledWrapper = styled.div`
     box-shadow: 0 0 3px currentColor;
     transform: translate(-50%, -50%);
     opacity: 0.7;
+    will-change: transform, opacity;
   }
 
   .progress-container {
@@ -279,16 +275,9 @@ const StyledWrapper = styled.div`
     box-shadow: 0 0 5px currentColor;
   }
 
-  /* Responsive adjustments */
   @media (max-width: 768px) {
-    .progress-container {
-      gap: 0.5rem;
-    }
-    
-    .progress-dot {
-      width: 8px;
-      height: 8px;
-    }
+    .progress-container { gap: 0.5rem; }
+    .progress-dot { width: 8px; height: 8px; }
   }
 `;
 

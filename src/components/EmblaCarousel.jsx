@@ -1,6 +1,7 @@
-'use client'
+ 'use client'
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from 'next/image';
 import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
 import {
   PrevButton,
@@ -224,11 +225,15 @@ const EmblaCarousel = (props) => {
                   {/* Holographic border */}
                   <div className="absolute inset-0 border-2 border-transparent bg-gradient-to-r from-cyan-400/50 via-purple-400/50 to-pink-400/50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="embla__slide__img-hitech w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
-                  />
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={event.image}
+                      alt={event.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="embla__slide__img-hitech object-cover transition-transform duration-700 group-hover:scale-105 group-hover:brightness-110"
+                    />
+                  </div>
                   
                   {/* Scan line effect on hover */}
                   <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-scan-fast z-30"></div>
@@ -332,10 +337,12 @@ const EmblaCarousel = (props) => {
               
               {/* Event image */}
               <div className="h-64 overflow-hidden rounded-t-2xl relative">
-                <img 
-                  src={selectedEvent.image} 
+                <Image
+                  src={selectedEvent.image}
                   alt={selectedEvent.title}
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 800px"
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
               </div>
